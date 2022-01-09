@@ -60,16 +60,6 @@ function Post({id, username, userImg, img, caption}) {
       }
     }
 
-    const deleted = async () => {
-      if(deleted) {
-        await deleteDoc(doc(db, this.id));
-      } else {
-        await deleteDoc(doc(db, this.id), {
-          username: session.user.username,
-        })
-      }
-    }
-
     const sendComment = async (e) => {
       e.preventDefault();
       
@@ -109,7 +99,6 @@ function Post({id, username, userImg, img, caption}) {
             ) : (
               <HeartIcon onClick={likePost} className="btn" />
             )}
-            <TrashIcon className="btn" onClick={deleted}/>
           <ChatIcon className="btn"/>
           <PaperAirplaneIcon className="btn"/>
         </div>
