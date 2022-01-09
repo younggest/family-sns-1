@@ -6,6 +6,7 @@ import {
   EmojiHappyIcon,
   HeartIcon,
   PaperAirplaneIcon,
+  TrashIcon,
 }from "@heroicons/react/outline";
 
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid" ;
@@ -58,6 +59,16 @@ function Post({id, username, userImg, img, caption}) {
       }
     }
 
+    const deleted = async () => {
+      if(deleted) {
+        await deleteDoc(doc(db, 'posts', id, 'likes', session.user.uid));
+      } else {
+        await setDoc(doc(db, 'posts', id, 'likes', session.user.uid), {
+          username: session.user.username,
+        })
+      }
+    }
+
     const sendComment = async (e) => {
       e.preventDefault();
       
@@ -97,6 +108,7 @@ function Post({id, username, userImg, img, caption}) {
             ) : (
               <HeartIcon onClick={likePost} className="btn" />
             )}
+            <TrashIcon className="btn" onClick={deleted}/>
           <ChatIcon className="btn"/>
           <PaperAirplaneIcon className="btn"/>
         </div>
