@@ -43,12 +43,11 @@ function Post({id, username, userImg, img, caption}) {
 
     useEffect(
       () => 
-        setHasLiked(
-          likes.findIndex((like) => like.id === session?.user?.uid) !== -1
+        setHasLiked( likes.findIndex((like) => like.id === session?.user?.uid) !== -1
         ),
       [likes]
     )
-
+    
     const likePost = async () => {
       if(hasLiked) {
         await deleteDoc(doc(db, 'posts', id, 'likes', session.user.uid));
