@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Moment from "react-moment";
+import { docRef } from "./Modal";
 
 function Post({id, username, userImg, img, caption}) {
     const { data: session } = useSession();
@@ -61,9 +62,9 @@ function Post({id, username, userImg, img, caption}) {
 
     const deleted = async () => {
       if(deleted) {
-        await deleteDoc(doc(db, 'posts', id, 'likes', session.user.uid));
+        await deleteDoc(doc(db, this.id));
       } else {
-        await setDoc(doc(db, 'posts', id, 'likes', session.user.uid), {
+        await deleteDoc(doc(db, this.id), {
           username: session.user.username,
         })
       }

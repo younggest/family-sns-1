@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { db } from "../firebase";
 import Post from "./Post"
 
-
 function Posts() {
     const[posts, setPosts] = useState([]);
 
